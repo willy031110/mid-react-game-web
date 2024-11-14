@@ -6,7 +6,7 @@ import UltimatePasswordPage from './pages/UltimatePasswordPage';
 
 const App: React.FC = () => {
     return (
-        <Router>
+        <Router basename="/mid-react-game-web"> {/* 使用你的專案名稱 */}
             <div>
                 <nav>
                     <Link to="/">Home</Link>
