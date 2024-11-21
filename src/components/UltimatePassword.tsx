@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './UltimatePassword.css'; // 引入CSS樣式
 
 const UltimatePassword: React.FC = () => {
-    const [min, setMin] = useState(1);
-    const [max, setMax] = useState(100);
+    const [min, setMin] = useState(2);
+    const [max, setMax] = useState(99);
     const [answer] = useState(Math.floor(Math.random() * 100) + 1);
     const [guess, setGuess] = useState<number | ''>('');
     const [message, setMessage] = useState('');
