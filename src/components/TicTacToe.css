@@ -1,49 +1,76 @@
-/* TicTacToe Styles */
-
+/* 通用樣式 */
 .tic-tac-toe-container {
     text-align: center;
     padding: 20px;
-}
-
-h1 {
+  }
+  
+  h1 {
     font-size: 2em;
     margin-bottom: 10px;
-    color: #333;
-}
-
-.status {
+    color: #f0f0f0;
+  }
+  
+  .status {
     margin-bottom: 15px;
     font-size: 1.2em;
-    color: #555;
-}
-
-.board {
+    color: #bbb;
+  }
+  
+  .board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     gap: 5px;
     justify-content: center;
     margin: 0 auto;
-}
-
-.square {
+  }
+  
+  .square {
     width: 100px;
     height: 100px;
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
-    background-color: #f9f9f9;
+    background-color: #333;
     border: 2px solid #444;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s;
-}
-
-.square:hover {
-    background-color: #eaeaea;
-}
-
-.reset-button {
+  }
+  
+  .square:hover {
+    background-color: #555;
+  }
+  
+  /* 頭像與分數容器 */
+  .scoreboard {
+    display: flex;            /* 彈性盒子，水平排列 */
+    flex-direction: row;      /* 水平排列 */
+    align-items: center;      /* 垂直方向居中 */
+    justify-content: flex-start; /* 頭像靠左對齊 */
+    gap: 10px;                /* 頭像與文字間距 */
+    margin: 10px 0;           /* 添加上下外距 */
+  }
+  
+  .scoreboard img {
+    width: 50px;              /* 頭像大小 */
+    height: 50px;
+    object-fit: cover;        /* 防止圖片變形 */
+    border-radius: 50%;       /* 圓形頭像 */
+  }
+  
+  .scoreboard .info {
+    display: flex;
+    flex-direction: column;   /* 文字垂直排列 */
+    text-align: left;         /* 文字靠左對齊 */
+  }
+  
+  .scoreboard div {
+    text-align: center;
+  }
+  
+  /* 遊戲操作按鈕 */
+  .reset-button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -53,42 +80,94 @@ h1 {
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s;
-}
-
-.reset-button:hover {
+  }
+  
+  .reset-button:hover {
     background-color: #0056b3;
-}
-.status {
-    font-size: 24px;
+  }
+  
+  .game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
-}
-
-.board {
+  }
+  
+  .score-board {
+    font-size: 20px;
+  }
+  
+  .game-container {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .game-board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-gap: 5px;
+  }
+  
+  .game-info {
+    text-align: center;
     margin-bottom: 20px;
-}
-
-.square {
-    width: 100px;
-    height: 100px;
-    font-size: 24px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.square:focus {
-    outline: none;
-}
-
-button {
+  }
+  
+  .status {
+    font-size: 1.5rem;
+    color: #f0f0f0;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-}
-
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #666;
+  }
+  
+  /* 屏幕小時調整 */
+  @media (max-width: 768px) {
+    .game-container {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  
+    .scoreboard {
+      width: 100%;
+      flex-direction: column;
+    }
+  
+    .scoreboard img {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .square {
+      width: 80px;
+      height: 80px;
+      font-size: 18px;
+    }
+  
+    .reset-button {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  

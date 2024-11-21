@@ -4,7 +4,13 @@
   padding: 2rem;
   text-align: center;
 }
-
+.tic-tac-toe-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

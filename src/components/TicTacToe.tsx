@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { ScoreBoard } from './Score';
+
 
 const TicTacToe: React.FC = () => {
     const [board, setBoard] = useState<string[]>(Array(9).fill(null));
@@ -6,7 +8,13 @@ const TicTacToe: React.FC = () => {
     const [isGameOver, setIsGameOver] = useState(false);
     const [mode, setMode] = useState<'single' | 'two'>('single'); // 'single' 單人模式，'two' 雙人模式
     const [gameResult, setGameResult] = useState<string>(''); // 存儲遊戲結果
-
+    const [xScore, setXScore] = useState(0);  // 玩家 X 分數
+    const [oScore, setOScore] = useState(0);  // 玩家 O 分數
+    const resetScores = () => {
+        setXScore(0);
+        setOScore(0);
+    };
+    
     // 點擊格子進行下棋
     const handleClick = (index: number) => {
         if (board[index] || calculateWinner(board) || isGameOver) return;
@@ -109,11 +117,17 @@ const TicTacToe: React.FC = () => {
         if (winner) {
             setGameResult(`贏家: ${winner}`);
             setIsGameOver(true);
+            if (winner === 'X') {
+                setXScore((prev) => prev + 1); // 玩家 X 分數加 1
+            } else if (winner === 'O') {
+                setOScore((prev) => prev + 1); // 玩家 O 分數加 1
+            }
         } else if (checkForDraw(board)) {
             setGameResult('平手！');
             setIsGameOver(true);
         }
     }, [board]);
+    
 
     // 在電腦回合時自動進行下棋
     useEffect(() => {
@@ -140,23 +154,51 @@ const TicTacToe: React.FC = () => {
     };
 
     return (
-        <div>
-            <button onClick={() => toggleMode('single')}>單人對電腦</button>
-            <button onClick={() => toggleMode('two')}>雙人對戰</button>
-            <div className="status">{gameResult || `下一位玩家: ${isXNext ? 'X' : 'O'}`}</div>
-            <div className="board">
-                {board.map((cell, index) => (
-                    <button
-                        key={index}
-                        onClick={() => handleClick(index)}
-                        className="square"
-                        disabled={isGameOver || cell !== null}
-                    >
-                        {cell}
-                    </button>
-                ))}
+        <div className="tic-tac-toe-container">
+            <div className="game-container">
+                 {/* 遊戲模式切換與計分重置 */}
+            <div>
+                <button onClick={() => toggleMode('single')}>單人對電腦</button>
+                <button onClick={() => toggleMode('two')}>雙人對戰</button>
+                <button onClick={resetScores}>重新計分</button>
             </div>
-            <button onClick={resetGame}>重新開始</button>
+                {/* 左側分數板 */}
+                <div className="scoreboard">
+                    <img src="玩家.jpg" alt="Player X" />
+                    <div className="info">
+                    <p>玩家 X</p>
+                    <p>分數: {xScore}</p>
+                    </div>
+                </div>
+
+                {/* 棋盤 */}
+                <div className="game-board">
+                    
+                    <div className="status">{gameResult || `下一位玩家: ${isXNext ? 'X' : 'O'}`}</div>
+                    <div className="board">
+                        {board.map((cell, index) => (
+                            <button
+                                key={index}
+                                className="square"
+                                onClick={() => handleClick(index)}
+                                disabled={isGameOver || cell !== null}
+                            >
+                                {cell}
+                            </button>
+                        ))}
+                    </div>
+                    <button className="reset-button" onClick={resetGame}>重新開始</button>
+                </div>
+
+                {/* 右側分數板 */}
+                <div className="scoreboard ">
+                    <img src={mode === 'single' ? '電腦.png' : '玩家.jpg'} alt="Player O" />
+                    <p>{mode === 'single' ? '電腦' : '玩家 O'}</p>
+                    <p>分數: {oScore}</p>
+                </div>
+            </div>
+
+           
         </div>
     );
 };
