@@ -154,51 +154,27 @@ const TicTacToe: React.FC = () => {
     };
 
     return (
-        <div className="tic-tac-toe-container">
-            <div className="game-container">
-                 {/* 遊戲模式切換與計分重置 */}
-            <div>
-                <button onClick={() => toggleMode('single')}>單人對電腦</button>
-                <button onClick={() => toggleMode('two')}>雙人對戰</button>
-                <button onClick={resetScores}>重新計分</button>
+        <div>
+            <button onClick={resetGame}>重新開始</button>
+            <button onClick={() => toggleMode('single')}>單人對電腦</button>
+            <button onClick={() => toggleMode('two')}>雙人對戰</button>
+            <button onClick={resetScores}>重新計分</button>
+            <ScoreBoard xScore={xScore} oScore={oScore} />
+            <div className="status">{gameResult || `下一位玩家: ${isXNext ? 'X' : 'O'}`}</div>
+            <div className="board">
+                {board.map((cell, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handleClick(index)}
+                        className="square"
+                        disabled={isGameOver || cell !== null}
+                    >
+                        {cell}
+                    </button>
+                ))}
             </div>
-                {/* 左側分數板 */}
-                <div className="scoreboard">
-                    <img src="玩家.jpg" alt="Player X" />
-                    <div className="info">
-                    <p>玩家 X</p>
-                    <p>分數: {xScore}</p>
-                    </div>
-                </div>
+            
 
-                {/* 棋盤 */}
-                <div className="game-board">
-                    
-                    <div className="status">{gameResult || `下一位玩家: ${isXNext ? 'X' : 'O'}`}</div>
-                    <div className="board">
-                        {board.map((cell, index) => (
-                            <button
-                                key={index}
-                                className="square"
-                                onClick={() => handleClick(index)}
-                                disabled={isGameOver || cell !== null}
-                            >
-                                {cell}
-                            </button>
-                        ))}
-                    </div>
-                    <button className="reset-button" onClick={resetGame}>重新開始</button>
-                </div>
-
-                {/* 右側分數板 */}
-                <div className="scoreboard ">
-                    <img src={mode === 'single' ? '電腦.png' : '玩家.jpg'} alt="Player O" />
-                    <p>{mode === 'single' ? '電腦' : '玩家 O'}</p>
-                    <p>分數: {oScore}</p>
-                </div>
-            </div>
-
-           
         </div>
     );
 };

@@ -4,7 +4,7 @@ const Home: React.FC = () => {
     return (
         <div>
             <h1>Welcome to the Game Website</h1>
-            <p>Select a game to play!</p>
+            <h2>Select a game to play!(above)</h2>
         </div>
     );
 };
