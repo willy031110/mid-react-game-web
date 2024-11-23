@@ -1,50 +1,43 @@
-# React + TypeScript + Vite
+# GAME WEB
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 設計概念
+我們想做出簡單且直觀的遊戲介面，讓使用者無需額外學習即可上手。遊戲設計以娛樂為主要目的，玩家可以在網頁上輕鬆進行互動，並且享受這兩款遊戲的樂趣。
+### 簡潔的UI
+我們的目標是讓使用者專注於遊戲本身，減少不必要的干擾。界面簡單、直觀，讓玩家輕鬆進行遊戲。
+### 即時反饋
+遊戲操作後會有即時的視覺反饋，幫助玩家了解遊戲狀態，例如每回合後顯示當前勝負情況。
 
-Currently, two official plugins are available:
+## 技術選用
+### React
+React 作為核心前端框架，簡化了組件化的開發，使得應用可以更容易地管理狀態，並實現高效的 UI 渲染。
+### TypeScript
+使用 TypeScript 來增加代碼的可維護性和可讀性，並且能在開發過程中捕獲錯誤，提升開發效率。使用 TSX 語法將 HTML 結構與 React 組件緊密結合。
+### CSS
+使用 CSS 進行頁面的樣式設計，配合響應式設計，保證不同設備上的顯示效果一致。透過簡單且清晰的 CSS 規則來實現現代化的界面。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 設計原則
+### 簡單易用
+無論是遊戲玩法還是界面設計，都力求簡單，避免複雜的操作和元素。
+### 可訪問性
+考慮到不同的使用者需求，提供清晰的界面和反饋，確保遊戲能夠為盡可能多的用戶群體所接受。
+### 即時反應
+在玩家每次操作後，遊戲會提供即時的反應，無論是圈圈叉叉的勝負結果，還是終極密碼的猜測反饋，都能即時更新。
 
-## Expanding the ESLint configuration
+## 規劃
+### 圈圈叉叉 (Tic-Tac-Toe)
+#### 功能
+選擇單人模式或雙人模式
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+點擊格子進行遊戲
 
-- Configure the top-level `parserOptions` property like this:
+反饋玩家回合及遊戲結束情況
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+提供重新開始遊戲的選項
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+我們為單人模式的AI增加一個Min-Max 對局搜尋法，這是一種常用的博弈樹搜索算法，能夠幫助 AI 評估各種可能的遊戲狀況，並選擇最優解，讓玩家進行單人遊戲時可以更有挑戰性。
+### 終極密碼 (Ultimate Password)
+#### 功能
+輸入猜測的數字
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+反饋每次猜測的結果
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
